@@ -1,11 +1,8 @@
-#include <boost/archive/iterators/base64_from_binary.hpp>
-#include <boost/archive/iterators/binary_from_base64.hpp>
-#include <boost/archive/iterators/transform_width.hpp>
-#include <string>
-#include <iostream>
-#include <sstream>
+#include "base64_coder.h"
+
 using namespace std;
-bool Base64Encode(const string& input, string* output) {
+
+bool Base64Coder::Base64Encode(const string& input, string* output) {
   typedef boost::archive::iterators::base64_from_binary<boost::archive::iterators::transform_width<string::const_iterator, 6, 8> > Base64EncodeIterator;
   stringstream result;
   copy(Base64EncodeIterator(input.begin()) , Base64EncodeIterator(input.end()), ostream_iterator<char>(result));
@@ -17,7 +14,7 @@ bool Base64Encode(const string& input, string* output) {
   return output->empty() == false;
 }
 
-bool Base64Decode(const string& input, string* output) {
+bool Base64Coder::Base64Decode(const string& input, string* output) {
   typedef boost::archive::iterators::transform_width<boost::archive::iterators::binary_from_base64<string::const_iterator>, 8, 6> Base64DecodeIterator;
   stringstream result;
   try {
@@ -27,4 +24,5 @@ bool Base64Decode(const string& input, string* output) {
   }
   *output = result.str();
   return output->empty() == false;
-}
+};
+

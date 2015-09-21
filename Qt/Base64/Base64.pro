@@ -13,14 +13,17 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        maindialog.cpp \
-    base64utils.cpp
+    base64_coder.cpp \
+    main_dialog.cpp
 
-HEADERS  += maindialog.h
+HEADERS  += \
+    base64_coder.h \
+    main_dialog.h
 
-FORMS    += maindialog.ui
+FORMS    += \
+    main_dialog.ui
 
-unix|win32: LIBS += -L$$PWD/D:/software/boost/boost_1_56_0_build/lib/ -llibboost_serialization-vc90-mt-1_56
+INCLUDEPATH += D:/software/boost/boost_1_56_0_build/include/boost-1_56/
+LIBS += -LD:/software/boost/boost_1_56_0_build/lib/libboost_serialization-vc120-mt-1_56
 
-INCLUDEPATH += $$PWD/D:/software/boost/boost_1_56_0_build/include
-DEPENDPATH += $$PWD/D:/software/boost/boost_1_56_0_build/include
+

@@ -1,4 +1,4 @@
-#include "maindialog.h"
+#include "main_dialog.h"
 #include "ui_maindialog.h"
 #include <QFile>
 #include <QTextStream>
@@ -7,13 +7,14 @@
 #include <QUuid>
 #include <QDebug>
 #include <QDateTime>
+#include <base64_coder.h>
 
 MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::MainDialog)
 {
     ui->setupUi(this);
-    connect(ui->enocde,SIGNAL(clicked()),this,SLOT(on_enocde_clicked()));
+    //connect(ui->enocde,SIGNAL(clicked()),this,SLOT(on_enocde_clicked()));
 }
 
 MainDialog::~MainDialog()
@@ -25,9 +26,17 @@ void MainDialog::on_enocde_clicked()
 {
     QString code = ui->inputFileCode->toPlainText();
     qDebug()<<code<<endl;
+    string base64_str =code.toStdString();
+    string output_str;
+
+    Base64Coder::Base64Decode(base64_str, &output_str);
+    cout<<"decode: \n"<<output_str<<endl;
+
+
     //endoce base64
     QTextCodec *codec = QTextCodec::codecForName("UTF-8");
-    QByteArray data = codec->fromUnicode(code);
+    QString qOutput_str=QString::fromStdString(output_str);
+    QByteArray data = codec->fromUnicode(qOutput_str);
 
     qint64 msecs = QDateTime::currentMSecsSinceEpoch();
 
