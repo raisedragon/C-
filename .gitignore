@@ -5,3 +5,4 @@
 **/WEB-INF/lib/*
 **/.svn
 **/.svn/*
+**/build-*-Debug

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-long FileUtils::readFileBytes(const char *name,char *buffer)
+long FileUtils::readFileBytes(const char *name,char **buffer)
 {
     ifstream infile (name,ifstream::binary);
     // get size of file
@@ -14,10 +14,12 @@ long FileUtils::readFileBytes(const char *name,char *buffer)
     infile.seekg (0);
 
     // allocate memory for file content
-    buffer = new char[size];
+    *buffer = new char[size];
 
     // read content of infile
-    infile.read (buffer,size);
+    infile.read (*buffer,size);
+
+   // cout<<(*buffer)[size-1]<<endl;
 
     infile.close();
     return size;

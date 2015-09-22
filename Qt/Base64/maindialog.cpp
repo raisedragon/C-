@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QDateTime>
 #include <base64_coder.h>
+#include "fileutils.h"
 
 MainDialog::MainDialog(QWidget *parent) :
     QDialog(parent),
@@ -27,6 +28,8 @@ void MainDialog::on_enocde_clicked()
     QString code = ui->inputFileCode->toPlainText();
     qDebug()<<code<<endl;
     string base64_str =code.toStdString();
+
+
     string output_str;
 
     Base64Coder::Base64Decode(base64_str, &output_str);
