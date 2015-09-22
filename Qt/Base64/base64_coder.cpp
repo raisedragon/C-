@@ -22,7 +22,8 @@ bool Base64Coder::Base64Decode(const string& input, string* output) {
   } catch(...) {
     return false;
   }
+
   *output = result.str();
   return output->empty() == false;
-};
+}
 

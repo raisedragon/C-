@@ -1,4 +1,4 @@
-#include "main_dialog.h"
+#include "maindialog.h"
 #include "ui_maindialog.h"
 #include <QFile>
 #include <QTextStream>
@@ -34,13 +34,13 @@ void MainDialog::on_enocde_clicked()
 
 
     //endoce base64
-    QTextCodec *codec = QTextCodec::codecForName("UTF-8");
     QString qOutput_str=QString::fromStdString(output_str);
-    QByteArray data = codec->fromUnicode(qOutput_str);
+    QByteArray data = qOutput_str.toUtf8();
+
 
     qint64 msecs = QDateTime::currentMSecsSinceEpoch();
 
-    QString name = QString::number(msecs)+".txt";
+    QString name = QString::number(msecs)+".pdf";
 
     QString path = ui->outputPath->text();
     QString fullname = path + name;
